@@ -7,18 +7,13 @@ public class Persona {
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
-    private int edad;
+    private int edad = 0;
     private String dni;
     private String direccion;
 
     // Constructor
-    public Persona(String nombre, String apellido, Date fechaNacimiento, int edad, String dni, String direccion) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
-        this.dni = dni;
-        this.direccion = direccion;
+    public Persona() {
+
     }
 
     // Métodos
@@ -53,6 +48,8 @@ public class Persona {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         if(fechaNacimiento != null){
+            // Restar 1 al mes para ajustarlo al rango de 0 a 11
+            fechaNacimiento.setMonth(fechaNacimiento.getMonth() - 1);
             this.fechaNacimiento = fechaNacimiento;
         } else {
             System.out.println("La fecha de nacimiento no puede estar vacía");
@@ -78,7 +75,7 @@ public class Persona {
     }
 
     public void setDni(String dni) {
-        if(dni != null && dni.length() == 8){
+        if(dni != null && dni.length() == 9){
             if(validatedDni(dni)){
                 System.out.println("DNI válido");
                 this.dni = dni;
@@ -90,16 +87,12 @@ public class Persona {
 
     private boolean validatedDni(String dni){
         boolean valido = false;
-        try{
-            int numero = Integer.parseInt(dni.substring(0, 7));
-            char letra = dni.charAt(8);
+            int numero = Integer.parseInt(dni.substring(0, 8)); // Corregir para que el substring sea de 0 a 8 (8 excluido)
+            char letra = dni.charAt(8); // Cambiar a posición 8 para obtener la letra
             char letraCalculada = calcularLetraDni(numero);
             if(letra == letraCalculada){
                 valido = true;
             }
-        }catch(NumberFormatException e){
-            System.out.println("El DNI debe contener 8 números y una letra");
-        }
         return valido;
     }
 
