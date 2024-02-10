@@ -10,4 +10,14 @@ public class Persona {
     private int edad;
     private String dni;
     private String direccion;
+
+    // Constructor
+    public Persona(String nombre, String apellido, Date fechaNacimiento, int edad, String dni, String direccion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.dni = dni;
+        this.direccion = direccion;
+    }
 }
